@@ -4,18 +4,15 @@ const REGION = 'eu-west-1';
 const DynamoDBClient = new aws.DynamoDB.DocumentClient({ region: REGION });
 
 export const getWord = async (word: string): Promise<aws.DynamoDB.ScanOutput> => {
-	// try {
-	const params = {
+	var params = {
 		TableName: 'Dictionary',
-		FilterExpression: 'Word = :word',
-		ExpressionAttributeValues: { ':word': word },
+		KeyConditionExpression: 'Word = :word ',
+		ExpressionAttributeValues: {
+			':word': word,
+		},
 	};
-	const data: ScanOutput = await DynamoDBClient.scan(params).promise();
+	const data: ScanOutput = await DynamoDBClient.query(params).promise();
 	return data;
-	// } catch (error) {
-	// 	console.log(error);
-	// 	return false;
-	// }
 };
 
 export const getWordByOnlyPos = async (pos: string): Promise<aws.DynamoDB.ScanOutput> => {
@@ -60,9 +57,12 @@ export const getWordByPosAndLetter = async (
 export const getWordByPos = async (word: string, pos: string): Promise<aws.DynamoDB.ScanOutput> => {
 	const params = {
 		TableName: 'Dictionary',
-		FilterExpression: 'Word = :word AND Pos = :pos',
-		ExpressionAttributeValues: { ':word': word, ':pos': pos + '.' },
+		KeyConditionExpression: 'Word = :word and Pos = :pos ',
+		ExpressionAttributeValues: {
+			':word': word,
+			':pos': pos + '.',
+		},
 	};
-	const data = await DynamoDBClient.scan(params).promise();
+	const data: ScanOutput = await DynamoDBClient.query(params).promise();
 	return data;
 };
