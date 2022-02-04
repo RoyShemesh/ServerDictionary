@@ -1,1 +1,1 @@
-GET http://localhost:8080/ON/adv
+GET http://localhost:8080/part-of-speech/v?letter=A
