@@ -1,6 +1,7 @@
 import express, { Request } from 'express';
 import morgan from 'morgan';
 import cors from 'cors';
+import ServerlessHttp from 'serverless-http';
 import {
 	getWord,
 	getWordByOnlyPos,
@@ -71,4 +72,5 @@ app.get('/:word/:pos', async (req, res) => {
 		res.status(404).send('Word not found');
 	}
 });
-export default app;
+// export default app;
+module.exports.handler = ServerlessHttp(app);
