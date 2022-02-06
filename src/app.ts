@@ -9,11 +9,18 @@ import {
 } from './controllers/dictionaryController';
 import { AttributeMap, ScanOutput } from 'aws-sdk/clients/dynamodb';
 import { Word, WordWithoutDefention } from './utils/types';
+import path from 'path';
 const app = express();
 app.use(express.json());
 app.use(cors());
 morgan.token('body', (req: Request) => JSON.stringify(req.body));
 app.use(morgan(':method :url :status :res[content-length] - :response-time ms :body'));
+
+// app.use('/', express.static(path.join(__dirname, '..', '/build', '/index.html'))); // serve main path as static dir
+// app.get('/', (req, res) => {
+// 	// res.sendFile(path.join('..', '/build', '/index.html'), { root: __dirname });
+// 	res.sendFile(path.join(__dirname, '..', '/build', '/index.html'));
+// });
 
 app.get('/:word', async (req, res) => {
 	try {
