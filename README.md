@@ -11,7 +11,7 @@ Link : https://wezbmzg6w5.execute-api.eu-west-1.amazonaws.com/api
 1. Fork this repo into your account.
 2. Clone the forked repo to your computer.
 3. Run `npm install`
-4. Run `npm run dev` for start recicve requsets.
+4. Run `npm run dev` for start recicve requsets on depelopment environment.
 
 ## Lambda functions
 
